@@ -124,7 +124,31 @@ int read_keypad(void)
 		}
 		counter += 1;
 	}
-
 	return key;
+}
+
+
+void key_press(void) 
+{		int pressed_key = -1;
+		int key = read_keypad();
+		int key_counter = 0;
+	
+		if(key != -1)
+		{
+			pressed_key = key;
+			printf("key: %d\n", pressed_key);
+			if(key_counter < 1000)
+			{
+				key_counter++;
+			}
+		}
+		else if(key != pressed_key && key == -1)
+		{
+			printf("The key %d was pressed for %d ms. \n", pressed_key, key_counter * 7);
+			fsmEvent(pressed_key, key_counter);
+			pressed_key = -1;
+			key_counter = 0;
+		}
+
 }
 
