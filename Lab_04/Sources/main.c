@@ -11,11 +11,11 @@
 #include "stm32f4xx_hal.h"              // Keil::Device:STM32Cube HAL:Common
 #include "cmsis_os.h"                   // ARM::CMSIS:RTOS:Keil RTX
 #include "RTE_Components.h"             // Component selection
-
+#include "gpio.h"
 //The thread code is written in Thread_LED.c, just telling the toolchain that the 
 //functions are declared externally
 extern void initializeLED_IO			(void);
-extern void start_Thread_LED			(void);
+extern void StartApplication			(void);
 extern void Thread_LED(void const *argument);
 extern osThreadId tid_Thread_LED;
 void SystemClock_Config(void);
@@ -44,7 +44,9 @@ int main (void) {
 
 	/* User codes goes here*/
   initializeLED_IO();                       /* Initialize LED GPIO Buttons    */
-  start_Thread_LED();                       /* Create LED thread              */
+  MX_GPIO_Init();
+	
+	StartApplication();                      /* Create LED thread              */
 	/* User codes ends here*/
   
 	osKernelStart();                          /* start thread execution         */
