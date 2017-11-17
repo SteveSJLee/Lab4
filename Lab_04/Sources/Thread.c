@@ -2,6 +2,10 @@
 #include "stm32f4xx_hal.h"   
 #include "leddisplay.h"
 
+extern float finalAccX;
+extern float finalAccY;
+extern float finalAccZ;
+
 osThreadId tid_thread1;                          // ID for thread 1
 osThreadId tid_thread2;                          // ID for thread 2
   
@@ -10,13 +14,13 @@ osSemaphoreDef(semaphore);                       // Semaphore definition
 
 int digitIndex = 0;
 int counter = 0;
-int digit[4] = {1,2,3,3};
+int digitArray[3];
 //
 //   Thread 1 - High Priority - Active every 3ms
 //
-void thread1 (void const *argument) {
+void thread1(void const *argument) {
   while (1) {
-      osDelay(1);                                // Pass control to other tasks for 3ms
+    osDelay(1);                                // Pass control to other tasks for 3ms
     
 		osSemaphoreWait (semaphore, osWaitForever);        // Wait 1ms for the free semaphore
 				HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
@@ -31,13 +35,16 @@ void thread1 (void const *argument) {
 //
 void thread2 (void const *argument) {
   while (1) {
-			osDelay(1);
+		osDelay(1);
     osSemaphoreWait (semaphore, osWaitForever);  // Wait indefinitely for a free semaphore
 		
 		for(int i=0; i<500; i++){
-		showDigit(digit[digitIndex],digitIndex+1);
-		digitIndex = (digitIndex+1) % 4;
-		HAL_Delay(1);
+			digitArray[0] = ((int) finalAccX/100) % 10;
+			digitArray[1] = ((int) finalAccX/10)  % 10;
+			digitArray[2] = ((int) finalAccX)   % 10;
+			showDigit(digitArray[digitIndex],digitIndex+1);
+			digitIndex = (digitIndex+1) % 4;
+			HAL_Delay(1);
 		}																				// OK, the interface is free now, use it.
     osSemaphoreRelease (semaphore);              // Return a token back to a semaphore.
   }
@@ -46,14 +53,15 @@ void thread2 (void const *argument) {
 // Thread definitions 
 osThreadDef(thread1, osPriorityLow,   1, 0);
 osThreadDef(thread2, osPriorityHigh, 500, 0);
-GPIO_InitTypeDef 				LED_configuration;   
+GPIO_InitTypeDef 				LED_configuration;  
+
 void StartApplication (void) {
   semaphore = osSemaphoreCreate(osSemaphore(semaphore), 1);
   tid_thread1 = osThreadCreate(osThread(thread1), NULL);
   tid_thread2 = osThreadCreate(osThread(thread2), NULL);
 }
 
-	void initializeLED_IO (void){
+void initializeLED_IO (void){
 	
 	__HAL_RCC_GPIOD_CLK_ENABLE();
 	
@@ -63,6 +71,3 @@ void StartApplication (void) {
 	LED_configuration.Pull	= GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOD, &LED_configuration);	
 }
-/*----------------------------------------------------------------------------
- *      
- *---------------------------------------------------------------------------*/

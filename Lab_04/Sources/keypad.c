@@ -4,7 +4,6 @@
 #include "keypad.h"
 #include <stdio.h>
 
-
 GPIO_InitTypeDef GPIO_InitCol;
 GPIO_InitTypeDef GPIO_InitRow;
 
