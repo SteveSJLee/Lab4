@@ -145,7 +145,7 @@ void key_press(void)
 		else if(key != pressed_key && key == -1)
 		{
 			printf("The key %d was pressed for %d ms. \n", pressed_key, key_counter * 7);
-			fsmEvent(pressed_key, key_counter);
+			//fsmEvent(pressed_key, key_counter);
 			pressed_key = -1;
 			key_counter = 0;
 		}

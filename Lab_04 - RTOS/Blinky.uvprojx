@@ -419,6 +419,21 @@
               <FileType>5</FileType>
               <FilePath>.\Sources\tim.h</FilePath>
             </File>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>LEDDISPLAY.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\LEDDISPLAY.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\spi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -868,6 +883,21 @@
               <FileType>5</FileType>
               <FilePath>.\Sources\tim.h</FilePath>
             </File>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>LEDDISPLAY.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\LEDDISPLAY.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\spi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1315,6 +1345,21 @@
               <FileName>tim.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Sources\tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>LEDDISPLAY.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\LEDDISPLAY.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\spi.c</FilePath>
             </File>
           </Files>
         </Group>
